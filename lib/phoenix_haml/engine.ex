@@ -15,6 +15,10 @@ defmodule PhoenixHaml.Engine do
     quote bind_quoted: [func_name: func_name, content: content] do
       EEx.function_from_string(:defp, :"#{func_name}", content, [:assigns],
                                engine: Phoenix.Html.Engine)
+
+      def render(unquote(func_name), assigns) do
+        unquote(:"#{func_name}")(assigns)
+      end
     end
   end
 
