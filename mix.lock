@@ -1,4 +1,4 @@
-%{"calliope": {:package, "0.2.4"},
+%{"calliope": {:package, "0.2.5"},
   "cowboy": {:package, "1.0.0"},
   "cowlib": {:package, "1.0.0"},
   "inflex": {:package, "0.2.4"},

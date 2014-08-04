@@ -12,7 +12,7 @@ defmodule PhoenixHaml.Engine do
   def precompile(file_path, func_name) do
     content = read!(file_path)
 
-    quote bind_quoted: [func_name: func_name, content: content] do
+    quote unquote: true, bind_quoted: [func_name: func_name, content: content] do
       EEx.function_from_string(:defp, :"#{func_name}", content, [:assigns],
                                engine: Phoenix.Html.Engine)
 

@@ -12,7 +12,7 @@ defmodule PhoenixHamlTest do
       message: "hi",
       within: {MyApp.Templates, "layouts/application.html"}
     )
-    assert html == "<html>\n  <body>\n    <h2>New Template</h2>\n  </body>\n</html>\n"
+    assert html == "<html><body><h2>New Template</h2></body></html>"
   end
 
   test "render a haml template without layout" do
