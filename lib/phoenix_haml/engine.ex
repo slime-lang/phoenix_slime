@@ -23,9 +23,8 @@ defmodule PhoenixHaml.Engine do
   end
 
   defp read!(file_path) do
-    file_path
-    |> File.read!
-    |> Calliope.Render.precompile
+    template = file_path |> File.read! |> Calliope.Render.precompile
+    "<% _ = assigns %>" <> template
   end
 end
 
