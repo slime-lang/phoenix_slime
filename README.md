@@ -5,7 +5,7 @@
 
 ## Usage
 
-  1. Add `{:phoenix_haml, "~> 0.0.3"}` to your mix deps
+  1. Add `{:phoenix_haml, "~> 0.0.4"}` to your mix deps
   2. Add the following your Phoenix `config/config.exs`
 
 ```elixir
