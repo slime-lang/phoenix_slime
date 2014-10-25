@@ -1,8 +1,8 @@
-%{"calliope": {:package, "0.2.5"},
-  "cowboy": {:package, "1.0.0"},
-  "cowlib": {:package, "1.0.0"},
-  "linguist": {:package, "0.1.2"},
-  "phoenix": {:package, "0.4.0"},
-  "plug": {:package, "0.7.0"},
-  "poison": {:package, "1.0.3"},
-  "ranch": {:package, "1.0.0"}}
+%{"calliope": {:hex, :calliope, "0.2.7"},
+  "cowboy": {:hex, :cowboy, "1.0.0"},
+  "cowlib": {:hex, :cowlib, "1.0.0"},
+  "linguist": {:hex, :linguist, "0.1.2"},
+  "phoenix": {:git, "git://github.com/phoenixframework/phoenix.git", "8cffae4744e30e06e6770b4170e2884edd09a85f", []},
+  "plug": {:hex, :plug, "0.8.1"},
+  "poison": {:hex, :poison, "1.2.0"},
+  "ranch": {:hex, :ranch, "1.0.0"}}
