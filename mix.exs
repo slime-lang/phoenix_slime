@@ -19,7 +19,7 @@ defmodule PhoenixHaml.Mixfile do
   end
 
   def application do
-    [applications: [:phoenix]]
+    [applications: [:phoenix, :calliope]]
   end
 
   defp deps do
