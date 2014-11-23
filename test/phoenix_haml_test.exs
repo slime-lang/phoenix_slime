@@ -18,7 +18,7 @@ defmodule PhoenixHamlTest do
   test "render a haml template with layout" do
     html = View.render(MyApp.PageView, "new.html",
       message: "hi",
-      within: {MyApp.PageView, "application.html"}
+      layout: {MyApp.PageView, "application.html"}
     )
     assert html == {:safe, "<html><body><h2>New Template</h2></body></html>"}
   end
