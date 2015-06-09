@@ -5,14 +5,10 @@
 
 ## Usage
 
-  1. Add `{:phoenix_haml, github: "programisti/phoenix_haml"}` to your deps in `mix.exs`.
+  1. Add `{:phoenix_haml, "~> 0.0.5"}` to your deps in mix.exs. If you generated your app from the Phoenix master branch, add phoenix_haml's master branch to your deps instead. `{:phoenix_haml, github: "chrismccord/phoenix_haml"}`
   2. Add the following your Phoenix `config/config.exs`
 
 ```elixir
   config :phoenix, :template_engines,
     haml: PhoenixHaml.Engine
 ```
-
-
-I forked this because it was locked at 12.0 version of phoenix so i have changed it to 13.1
-more details here: https://github.com/chrismccord/phoenix_haml/issues/12
