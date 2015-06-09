@@ -5,7 +5,8 @@
 
 ## Usage
 
-  1. Add the following your Phoenix `config/config.exs`
+  1. Add `{:phoenix_haml, github: "programisti/phoenix_haml"}` to your deps in `mix.exs`.
+  2. Add the following your Phoenix `config/config.exs`
 
 ```elixir
   config :phoenix, :template_engines,
