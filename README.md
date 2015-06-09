@@ -5,7 +5,7 @@
 
 ## Usage
 
-  Add the following your Phoenix `config/config.exs`
+  1. Add the following your Phoenix `config/config.exs`
 
 ```elixir
   config :phoenix, :template_engines,
