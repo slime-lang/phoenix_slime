@@ -4,21 +4,13 @@ defmodule PhoenixHaml.Engine do
   @doc """
   Precompiles the String file_path into a function defintion, using Calliope engine
   """
-  def compile(path, name) do
+  def compile(path, _name) do
     path
     |> read!
-    |> EEx.compile_string(engine: engine_for(name), file: path, line: 1)
+    |> EEx.compile_string(engine: Phoenix.HTML.Engine, file: path, line: 1)
   end
 
   defp read!(file_path) do
     file_path |> File.read! |> Calliope.Render.precompile
   end
-
-  defp engine_for(name) do
-    case Phoenix.Template.format_encoder(name) do
-      Phoenix.HTML.Engine -> Phoenix.HTML.Engine
-      _                   -> EEx.SmartEngine
-    end
-  end
 end
-
