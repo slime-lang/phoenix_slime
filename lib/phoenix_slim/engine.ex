@@ -1,8 +1,8 @@
-defmodule PhoenixHaml.Engine do
+defmodule PhoenixSlim.Engine do
   @behaviour Phoenix.Template.Engine
 
   @doc """
-  Precompiles the String file_path into a function defintion, using Calliope engine
+  Precompiles the String file_path into a function defintion, using SlimFast
   """
   def compile(path, _name) do
     path
@@ -11,6 +11,8 @@ defmodule PhoenixHaml.Engine do
   end
 
   defp read!(file_path) do
-    file_path |> File.read! |> Calliope.Render.precompile
+    file_path
+    |> File.read!
+    |> SlimFast.Renderer.precompile
   end
 end

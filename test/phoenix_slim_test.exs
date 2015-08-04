@@ -1,4 +1,4 @@
-defmodule PhoenixHamlTest do
+defmodule PhoenixSlimTest do
   use ExUnit.Case
   alias Phoenix.View
 
@@ -8,7 +8,7 @@ defmodule PhoenixHamlTest do
     use Phoenix.HTML
   end
 
-  test "render a haml template with layout" do
+  test "render a slim template with layout" do
     html = View.render(MyApp.PageView, "new.html",
       message: "hi",
       layout: {MyApp.PageView, "application.html"}
