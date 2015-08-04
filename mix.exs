@@ -1,33 +1,33 @@
-defmodule PhoenixHaml.Mixfile do
+defmodule PhoenixSlim.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :phoenix_haml,
-      version: "0.1.2",
-      elixir: "~> 1.0.1 or ~> 1.1",
+      app: :phoenix_slim,
+      version: "0.1.0",
+      elixir: "~> 1.0",
       deps: deps,
       package: [
-        contributors: ["Chris McCord"],
+        contributors: ["Sean Callan"],
         licenses: ["MIT"],
-        links: %{github: "https://github.com/chrismccord/phoenix_haml"}
+        links: %{github: "https://github.com/doomspork/phoenix_slim"}
       ],
       description: """
-      Phoenix Template Engine for Haml
+      Phoenix Template Engine for Slim
       """
     ]
   end
 
   def application do
-    [applications: [:phoenix, :calliope]]
+    [applications: [:phoenix, :slim_fast]]
   end
 
   defp deps do
     [
-      {:phoenix, "~> 0.13"},
-      {:phoenix_html, "~> 1.1"},
-      {:cowboy, "~> 1.0.0", only: [:dev, :test]},
-      {:calliope, "~> 0.3.0"}
+      {:phoenix, "~> 0.15.0"},
+      {:phoenix_html, "~> 2.0"},
+      {:cowboy, "~> 1.0", only: [:dev, :test]},
+      {:slim_fast, "~> 0.2.0"}
     ]
   end
 end

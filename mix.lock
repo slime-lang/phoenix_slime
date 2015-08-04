@@ -1,8 +1,8 @@
-%{"calliope": {:hex, :calliope, "0.3.0"},
-  "cowboy": {:hex, :cowboy, "1.0.0"},
+%{"cowboy": {:hex, :cowboy, "1.0.2"},
   "cowlib": {:hex, :cowlib, "1.0.1"},
-  "phoenix": {:hex, :phoenix, "0.13.1"},
-  "phoenix_html": {:hex, :phoenix_html, "1.2.1"},
-  "plug": {:hex, :plug, "0.13.0"},
+  "phoenix": {:hex, :phoenix, "0.15.0"},
+  "phoenix_html": {:hex, :phoenix_html, "2.0.1"},
+  "plug": {:hex, :plug, "0.14.0"},
   "poison": {:hex, :poison, "1.4.0"},
-  "ranch": {:hex, :ranch, "1.0.0"}}
+  "ranch": {:hex, :ranch, "1.1.0"},
+  "slim_fast": {:hex, :slim_fast, "0.2.0"}}

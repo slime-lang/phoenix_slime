@@ -1,2 +1,0 @@
-defmodule PhoenixHaml do
-end
