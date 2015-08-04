@@ -1,4 +1,4 @@
-# Phoenix Template Engine for Haml
+# Phoenix Template Engine for Slim
 
 > Powered by [SlimFast](https://github.com/doomspork/slim_fast)
 
