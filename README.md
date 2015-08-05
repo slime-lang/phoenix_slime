@@ -1,4 +1,4 @@
-# Phoenix Template Engine for Slim ![](https://img.shields.io/hexpm/v/phoenix_slim.svg)
+# Phoenix Template Engine for Slim [![Hex Version](https://img.shields.io/hexpm/v/phoenix_slim.svg)](https://hex.pm/packages/phoenix_slim)
  
 > Powered by [SlimFast](https://github.com/doomspork/slim_fast)
 
