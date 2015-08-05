@@ -5,4 +5,4 @@
   "plug": {:hex, :plug, "0.14.0"},
   "poison": {:hex, :poison, "1.4.0"},
   "ranch": {:hex, :ranch, "1.1.0"},
-  "slim_fast": {:hex, :slim_fast, "0.2.0"}}
+  "slim_fast": {:hex, :slim_fast, "0.3.0"}}
