@@ -20,10 +20,10 @@ defmodule PhoenixSlim.Mixfile do
   end
 
   def deps do
-    [{:phoenix, "~> 0.15.0"},
+    [{:phoenix, "~> 0.16"},
      {:phoenix_html, "~> 2.0"},
      {:cowboy, "~> 1.0", only: [:dev, :test]},
-     {:slim_fast, "~> 0.3.0"}]
+     {:slim_fast, "~> 0.4"}]
   end
 
   defp package do
