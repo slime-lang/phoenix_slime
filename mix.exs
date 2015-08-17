@@ -1,7 +1,7 @@
 defmodule PhoenixSlim.Mixfile do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.4.0"
 
   def project do
     [
@@ -21,9 +21,9 @@ defmodule PhoenixSlim.Mixfile do
 
   def deps do
     [{:phoenix, "~> 0.16"},
-     {:phoenix_html, "~> 2.0"},
+     {:phoenix_html, "~> 2.1"},
      {:cowboy, "~> 1.0", only: [:dev, :test]},
-     {:slim_fast, "~> 0.4"}]
+     {:slim_fast, ">= 0.6.0"}]
   end
 
   defp package do
