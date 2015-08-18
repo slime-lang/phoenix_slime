@@ -13,6 +13,21 @@
     slim: PhoenixSlim.Engine
 ```
 
+## Live Reloader
+In `my_app/config/dev.exs`, add or edit to include `slim` extension to list of watched files.
+
+```elixir
+# Watch static and templates for browser reloading.
+config :my_app, MyApp.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
+      ~r{web/views/.*(ex)$},
+      ~r{web/templates/.*(eex|slim)$}
+    ]
+  ]
+```
+
 ## License
 
 Please see [LICENSE](https://github.com/doomspork/slim_fast/blob/master/LICENSE) for licensing details.
