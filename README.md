@@ -5,7 +5,7 @@
 
 ## Usage
 
-  1. Add `{:phoenix_slim, "~> 0.4.0"}` to your deps in `mix.exs`.
+  1. Add `{:phoenix_slim, "~> 0.4.1"}` to your deps in `mix.exs`.
   2. Add the following your Phoenix `config/config.exs`:
 
 ```elixir
