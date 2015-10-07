@@ -30,4 +30,4 @@ config :my_app, MyApp.Endpoint,
 
 ## License
 
-Please see [LICENSE](https://github.com/doomspork/slim_fast/blob/master/LICENSE) for licensing details.
+Please see [LICENSE](https://github.com/doomspork/phoenix_slim/blob/master/LICENSE) for licensing details.
