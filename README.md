@@ -13,6 +13,8 @@
     slim: PhoenixSlim.Engine
 ```
 
+An example project can be found at [doomspork/phoenix_slim_example](http://github.com/doomspork/phoenix_slim_example).
+
 ## Live Reloader
 In `my_app/config/dev.exs`, add or edit to include `slim` extension to list of watched files.
 
