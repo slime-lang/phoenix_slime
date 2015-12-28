@@ -1,2 +1,0 @@
-defmodule PhoenixSlim do
-end

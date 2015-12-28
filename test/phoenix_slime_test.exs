@@ -1,4 +1,4 @@
-defmodule PhoenixSlimTest do
+defmodule PhoenixSlimeTest do
   use ExUnit.Case
   alias Phoenix.View
 

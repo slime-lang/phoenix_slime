@@ -1,14 +1,14 @@
-defmodule PhoenixSlim.Mixfile do
+defmodule PhoenixSlime.Mixfile do
   use Mix.Project
 
   @version "0.4.1"
 
   def project do
     [
-      app: :phoenix_slim,
+      app: :phoenix_slime,
       deps: deps,
       description: """
-      Phoenix Template Engine for Slim
+      Phoenix Template Engine for Slim-like templates
       """,
       elixir: "~> 1.0",
       package: package,
@@ -16,20 +16,20 @@ defmodule PhoenixSlim.Mixfile do
   end
 
   def application do
-    [applications: [:phoenix, :slim_fast]]
+    [applications: [:phoenix, :slime]]
   end
 
   def deps do
-    [{:phoenix, ">= 0.16.0"},
-     {:phoenix_html, ">= 2.1.0"},
-     {:cowboy, "~> 1.0", only: [:dev, :test]},
-     {:slim_fast, ">= 0.6.0"}]
+    [{:phoenix, "~> 1.1"},
+     {:phoenix_html, "~> 2.3"},
+     {:cowboy, "~> 1.0"},
+     {:slime, "~> 0.11.0"}]
   end
 
   defp package do
     [contributors: ["Sean Callan"],
      files: ["lib", "mix.exs", "README*", "LICENSE*"],
      licenses: ["MIT"],
-     links: %{github: "https://github.com/doomspork/phoenix_slim"}]
+     links: %{github: "https://github.com/slime-lang/phoenix_slime"}]
   end
 end
