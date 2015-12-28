@@ -1,4 +1,4 @@
-defmodule PhoenixSlim.Engine do
+defmodule PhoenixSlime.Engine do
   @behaviour Phoenix.Template.Engine
 
   @doc """
@@ -13,6 +13,6 @@ defmodule PhoenixSlim.Engine do
   defp read!(file_path) do
     file_path
     |> File.read!
-    |> SlimFast.Renderer.precompile
+    |> Slime.Renderer.precompile
   end
 end
