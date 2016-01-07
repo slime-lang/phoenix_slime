@@ -18,8 +18,8 @@
 
 ```elixir
   config :phoenix, :template_engines,
-    slim: PhoenixSlime.Engine
-   slime: PhoenixSlime.Engine
+    slim: PhoenixSlime.Engine,
+    slime: PhoenixSlime.Engine
 ```
 
 An example project can be found at [slime-lang/phoenix_slime_example][phoenix-slime-example].
