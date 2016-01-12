@@ -22,9 +22,9 @@
     slime: PhoenixSlime.Engine
 ```
 
-An example project can be found at [slime-lang/phoenix_slime_example][phoenix-slime-example].
+An example project can be found at [slime-lang/phoenix_slime_example][phoenix_slime_example].
 
-[phoenix-slime-example]: https://github.com/slime-lang/phoenix_slime
+[phoenix_slime_example]: https://github.com/slime-lang/phoenix_slime_example
 
 ## Live Reloader
 In `my_app/config/dev.exs`, include the `slim` and `slime` extensions in the list of watched files.
