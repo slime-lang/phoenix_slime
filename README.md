@@ -41,6 +41,20 @@ config :my_app, MyApp.Endpoint,
   ]
 ```
 
+## Generators
+
+This library also includes two `mix` tasks:
+
+`mix phoenix.gen.html.slime`
+`mix phoenix.gen.layout.slime`
+
+The first task creates a html resource in the same way `phoenix.gen.html` does
+with the exception that all files are `.slim` files instead of `.eex` files.
+
+The second task creates a new `web/templates/layout/app.html.slim` with the
+exact same content as the `app.html.eex` file. Do not forget to remove the old
+`app.html.eex` file.
+
 ## License
 
 MIT license. Please see [LICENSE][license] for details.
