@@ -23,7 +23,7 @@ defmodule PhoenixSlime.Mixfile do
     [{:phoenix, "~> 1.1"},
      {:phoenix_html, "~> 2.3"},
      {:cowboy, "~> 1.0"},
-     {:slime, "~> 0.11.0"}]
+     {:slime, "~> 0.12.2"}]
   end
 
   defp package do
