@@ -17,7 +17,7 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
 
   The generated resource will contain:
 
-    * a model in web/models
+    * a schema in web/models
     * a view in web/views
     * a controller in web/controllers
     * a migration file for the repository
@@ -42,7 +42,7 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
     path    = binding[:path]
     route   = String.split(path, "/") |> Enum.drop(-1) |> Kernel.++([plural]) |> Enum.join("/")
     binding = binding ++ [plural: plural, route: route, attrs: attrs,
-                          binary_id: opts[:binary_id],
+                          sample_id: sample_id(opts),
                           inputs: inputs(attrs), params: Mix.Phoenix.params(attrs),
                           template_singular: String.replace(binding[:singular], "_", " "),
                           template_plural: String.replace(plural, "_", " ")]
@@ -78,12 +78,20 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
     end
   end
 
+  defp sample_id(opts) do
+    if Keyword.get(opts, :binary_id, false) do
+      Keyword.get(opts, :sample_binary_id, "11111111-1111-1111-1111-111111111111")
+    else
+      -1
+    end
+  end
+
   defp validate_args!([_, plural | _] = args) do
     cond do
       String.contains?(plural, ":") ->
         raise_with_help
       plural != Phoenix.Naming.underscore(plural) ->
-        Mix.raise "expected the second argument, #{inspect plural}, to be all lowercase using snake_case convention"
+        Mix.raise "Expected the second argument, #{inspect plural}, to be all lowercase using snake_case convention"
       true ->
         args
     end
