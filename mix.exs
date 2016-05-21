@@ -20,7 +20,7 @@ defmodule PhoenixSlime.Mixfile do
   end
 
   def deps do
-    [{:phoenix, "~> 1.1"},
+    [{:phoenix, "~> 1.1 or ~> 1.2-rc"},
      {:phoenix_html, "~> 2.3"},
      {:cowboy, "~> 1.0"},
      {:slime, "~> 0.12.2"}]
