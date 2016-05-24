@@ -1,7 +1,7 @@
 defmodule PhoenixSlime.Mixfile do
   use Mix.Project
 
-  @version "0.5.1"
+  @version "0.6.0"
 
   def project do
     [

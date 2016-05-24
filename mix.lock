@@ -1,9 +1,9 @@
-%{"cowboy": {:hex, :cowboy, "1.0.4"},
-  "cowlib": {:hex, :cowlib, "1.0.2"},
-  "phoenix": {:hex, :phoenix, "1.1.1"},
-  "phoenix_html": {:hex, :phoenix_html, "2.3.0"},
-  "plug": {:hex, :plug, "1.0.3"},
-  "poison": {:hex, :poison, "1.5.0"},
-  "ranch": {:hex, :ranch, "1.2.0"},
+%{"cowboy": {:hex, :cowboy, "1.0.4", "a324a8df9f2316c833a470d918aaf73ae894278b8aa6226ce7a9bf699388f878", [:rebar, :make], [{:cowlib, "~> 1.0.0", [hex: :cowlib, optional: false]}, {:ranch, "~> 1.0", [hex: :ranch, optional: false]}]},
+  "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], []},
+  "phoenix": {:hex, :phoenix, "1.1.1", "9958482edd19e921fdde9c1c6e542dab6349d8219be85f6147deed2c30094324", [:mix], [{:poison, "~> 1.3", [hex: :poison, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}, {:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
+  "phoenix_html": {:hex, :phoenix_html, "2.3.0", "28264d1722a22426200224e500b2eac1f38f628e6ec30b20f332c3713edf2f82", [:mix], [{:plug, "~> 0.13 or ~> 1.0", [hex: :plug, optional: false]}]},
+  "plug": {:hex, :plug, "1.0.3", "8bbcbdaa4cb15170b9a15cb12153e8a6d9e176ce78e4c1990ea0b505b0ca24a0", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
+  "poison": {:hex, :poison, "1.5.0", "f2f4f460623a6f154683abae34352525e1d918380267cdbd949a07ba57503248", [:mix], []},
+  "ranch": {:hex, :ranch, "1.2.0", "b286a948a0706a700a9f577e5cecbb2dc66097ea79f3ddb20ba5536069bdb7aa", [:make], []},
   "slim_fast": {:hex, :slim_fast, "0.6.0"},
-  "slime": {:hex, :slime, "0.12.2"}}
+  "slime": {:hex, :slime, "0.13.0", "fb9b1296b5ef3fe6aed09deec2794a146c94f5270b3bcd9f956c01d3660fc196", [:mix], []}}
