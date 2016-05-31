@@ -42,6 +42,7 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
     path    = binding[:path]
     route   = String.split(path, "/") |> Enum.drop(-1) |> Kernel.++([plural]) |> Enum.join("/")
     binding = binding ++ [plural: plural, route: route, attrs: attrs,
+                          binary_id: opts[:binary_id],
                           sample_id: sample_id(opts),
                           inputs: inputs(attrs), params: Mix.Phoenix.params(attrs),
                           template_singular: String.replace(binding[:singular], "_", " "),
