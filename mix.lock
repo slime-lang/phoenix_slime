@@ -6,4 +6,4 @@
   "poison": {:hex, :poison, "1.5.0", "f2f4f460623a6f154683abae34352525e1d918380267cdbd949a07ba57503248", [:mix], []},
   "ranch": {:hex, :ranch, "1.2.0", "b286a948a0706a700a9f577e5cecbb2dc66097ea79f3ddb20ba5536069bdb7aa", [:make], []},
   "slim_fast": {:hex, :slim_fast, "0.6.0"},
-  "slime": {:hex, :slime, "0.13.0", "fb9b1296b5ef3fe6aed09deec2794a146c94f5270b3bcd9f956c01d3660fc196", [:mix], []}}
+  "slime": {:hex, :slime, "0.14.0", "db38c12f9d244295e127bc6fac88e3d75430c3d4b24ebde03a3704ccad678653", [:mix], []}}
