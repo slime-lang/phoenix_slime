@@ -2,7 +2,7 @@ defmodule PhoenixSlime.Engine do
   @behaviour Phoenix.Template.Engine
 
   @doc """
-  Precompiles the String file_path into a function defintion, using SlimFast
+  Precompiles the String file_path into a function definition, using SlimFast
   """
   def compile(path, _name) do
     path
