@@ -13,7 +13,7 @@
 
 ## Usage
 
-  1. Add `{:phoenix_slime, "~> 0.6.0"}` to your deps in `mix.exs`.
+  1. Add `{:phoenix_slime, "~> 0.7.0"}` to your deps in `mix.exs`.
   2. Add the following your Phoenix `config/config.exs`:
 
 ```elixir
