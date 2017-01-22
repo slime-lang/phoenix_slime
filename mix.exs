@@ -6,7 +6,7 @@ defmodule PhoenixSlime.Mixfile do
   def project do
     [
       app: :phoenix_slime,
-      deps: deps,
+      deps: deps(),
       description: """
       Phoenix Template Engine for Slim-like templates
       """,
