@@ -37,6 +37,9 @@ config :my_app, MyApp.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
       ~r{web/views/.*(ex)$},
       ~r{web/templates/.*(eex|slim|slime)$}
+      # For Phoenix >= 1.3
+      # ~r{lib/my_app/web/views/.*(ex)$},
+      # ~r{lib/my_app/web/templates/.*(eex|slim|slime)$}
     ]
   ]
 ```
