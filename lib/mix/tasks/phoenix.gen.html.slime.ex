@@ -37,14 +37,14 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
     default_opts = Application.get_env(:phoenix, :generators, [])
     opts = Keyword.merge(default_opts, opts)
 
-    attrs   = Mix.Phoenix.attrs(attrs)
+    attrs   = Mix.Phoenix.Schema.attrs(attrs)
     binding = Mix.Phoenix.inflect(singular)
     path    = binding[:path]
     route   = String.split(path, "/") |> Enum.drop(-1) |> Kernel.++([plural]) |> Enum.join("/")
     binding = binding ++ [plural: plural, route: route, attrs: attrs,
                           binary_id: opts[:binary_id],
                           sample_id: sample_id(opts),
-                          inputs: inputs(attrs), params: Mix.Phoenix.params(attrs),
+                          inputs: inputs(attrs), params: Mix.Phoenix.Schema.params(attrs),
                           template_singular: String.replace(binding[:singular], "_", " "),
                           template_plural: String.replace(plural, "_", " ")]
 
@@ -131,7 +131,9 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
         {label(key), ~s(= date_select f, #{inspect(key)}, class: "form-control"), error(key)}
       {key, :time}       ->
         {label(key), ~s(= time_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :datetime}   ->
+      {key, :utc_datetime}   ->
+        {label(key), ~s(= datetime_select f, #{inspect(key)}, class: "form-control"), error(key)}
+      {key, :naive_datetime}   ->
         {label(key), ~s(= datetime_select f, #{inspect(key)}, class: "form-control"), error(key)}
       {key, _}           ->
         {label(key), ~s(= text_input f, #{inspect(key)}, class: "form-control"), error(key)}
