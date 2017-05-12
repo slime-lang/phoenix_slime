@@ -57,12 +57,13 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
       {:eex, "controller_test.exs", "test/controllers/#{path}_controller_test.exs"},
     ]
 
+    extension = PhoenixSlime.ConfiguredExtension.file_extension
     Mix.Phoenix.copy_from slime_paths(), "priv/templates/phoenix.gen.html.slime", "", binding, [
-      {:eex, "edit.html.eex",       "web/templates/#{path}/edit.html.slim"},
-      {:eex, "form.html.eex",       "web/templates/#{path}/form.html.slim"},
-      {:eex, "index.html.eex",      "web/templates/#{path}/index.html.slim"},
-      {:eex, "new.html.eex",        "web/templates/#{path}/new.html.slim"},
-      {:eex, "show.html.eex",       "web/templates/#{path}/show.html.slim"},
+      {:eex, "edit.html.eex",       "web/templates/#{path}/edit.html.#{extension}"},
+      {:eex, "form.html.eex",       "web/templates/#{path}/form.html.#{extension}"},
+      {:eex, "index.html.eex",      "web/templates/#{path}/index.html.#{extension}"},
+      {:eex, "new.html.eex",        "web/templates/#{path}/new.html.#{extension}"},
+      {:eex, "show.html.eex",       "web/templates/#{path}/show.html.#{extension}"},
     ]
 
     instructions = """

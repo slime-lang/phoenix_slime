@@ -191,6 +191,29 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.SlimeTest do
     end
   end
 
+  describe "when :use_slime_extension env is set to true" do
+    setup do
+      Application.put_env(:phoenix_slime, :use_slime_extension, true)
+      on_exit fn ->
+        Application.delete_env(:phoenix_slime, :use_slime_extension)
+      end
+      :ok
+    end
+
+    test "generates files with .slime extension " do
+      in_tmp "generates .slime", fn ->
+        Mix.Tasks.Phoenix.Gen.Html.Slime.run ["User", "users"]
+
+        assert File.exists? "web/templates/user/edit.html.slime"
+        assert File.exists? "web/templates/user/form.html.slime"
+        assert File.exists? "web/templates/user/index.html.slime"
+        assert File.exists? "web/templates/user/new.html.slime"
+        assert File.exists? "web/templates/user/show.html.slime"
+      end
+    end
+  end
+
+
   test "plural can't contain a colon" do
     assert_raise Mix.Error, fn ->
       Mix.Tasks.Phoenix.Gen.Html.Slime.run ["Admin.User", "name:string", "foo:string"]

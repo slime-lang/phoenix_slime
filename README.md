@@ -55,6 +55,12 @@ The second task creates a new `web/templates/layout/app.html.slim` with the
 exact same content as the `app.html.eex` file. Do not forget to remove the old
 `app.html.eex` file.
 
+Generated files have `.slim` extension by default. If you prefer `.slime`, you could add the following line to your config:
+
+```elixir
+config :phoenix_slime, :use_slime_extension, true
+```
+
 ## License
 
 MIT license. Please see [LICENSE][license] for details.
