@@ -1,7 +1,7 @@
 defmodule PhoenixSlime.Mixfile do
   use Mix.Project
 
-  @version "0.9.0"
+  @version "0.10.0"
 
   def project do
     [
@@ -23,7 +23,7 @@ defmodule PhoenixSlime.Mixfile do
     [{:phoenix, "~> 1.3-rc"},
      {:phoenix_html, "~> 2.6"},
      {:cowboy, "~> 1.0"},
-     {:slime, "~> 0.16"},
+     {:slime, "~> 1.0"},
      {:ex_doc, ">= 0.0.0", only: :dev},
      {:earmark, ">= 0.0.0", only: :dev}]
   end
