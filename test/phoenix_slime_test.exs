@@ -8,7 +8,7 @@ defmodule PhoenixSlimeTest do
     use Phoenix.HTML
   end
 
-  test "render a slim template with layout" do
+  test "render a slime template with layout" do
     html = View.render(MyApp.PageView, "new.html",
       message: "hi",
       layout: {MyApp.PageView, "application.html"}
@@ -16,7 +16,7 @@ defmodule PhoenixSlimeTest do
     assert html == {:safe, [[["" | "<html><body>"], "" | "<h2>New Template</h2>"] | "</body></html>"]}
   end
 
-  test "render a slim template without layout" do
+  test "render a slime template without layout" do
     html = View.render(MyApp.PageView, "new.html", [])
     assert html == {:safe, ["" | "<h2>New Template</h2>"]}
   end

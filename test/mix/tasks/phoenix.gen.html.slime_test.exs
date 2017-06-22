@@ -37,11 +37,11 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.SlimeTest do
         assert file =~ "use PhoenixSlime.Web, :view"
       end
 
-      assert_file "web/templates/user/edit.html.slim", fn file ->
+      assert_file "web/templates/user/edit.html.slime", fn file ->
         assert file =~ "action: user_path(@conn, :update, @user)"
       end
 
-      assert_file "web/templates/user/form.html.slim", fn file ->
+      assert_file "web/templates/user/form.html.slime", fn file ->
         assert file =~ ~s(= text_input f, :name, class: "form-control")
         assert file =~ ~s(= number_input f, :age, class: "form-control")
         assert file =~ ~s(= number_input f, :height, step: "any", class: "form-control")
@@ -60,17 +60,17 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.SlimeTest do
         refute file =~ ":nicks"
       end
 
-      assert_file "web/templates/user/index.html.slim", fn file ->
+      assert_file "web/templates/user/index.html.slime", fn file ->
         assert file =~ "th Name"
         assert file =~ "= for user <- @users do"
         assert file =~ "td= user.name"
       end
 
-      assert_file "web/templates/user/new.html.slim", fn file ->
+      assert_file "web/templates/user/new.html.slime", fn file ->
         assert file =~ "action: user_path(@conn, :create)"
       end
 
-      assert_file "web/templates/user/show.html.slim", fn file ->
+      assert_file "web/templates/user/show.html.slime", fn file ->
         assert file =~ "strong Name:"
         assert file =~ "= @user.name"
       end
@@ -140,27 +140,27 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.SlimeTest do
         assert file =~ "use PhoenixSlime.Web, :view"
       end
 
-      assert_file "web/templates/admin/super_user/edit.html.slim", fn file ->
+      assert_file "web/templates/admin/super_user/edit.html.slime", fn file ->
         assert file =~ "h2 Edit super user"
         assert file =~ "action: super_user_path(@conn, :update, @super_user)"
       end
 
-      assert_file "web/templates/admin/super_user/form.html.slim", fn file ->
+      assert_file "web/templates/admin/super_user/form.html.slime", fn file ->
         assert file =~ ~s(= text_input f, :name, class: "form-control")
       end
 
-      assert_file "web/templates/admin/super_user/index.html.slim", fn file ->
+      assert_file "web/templates/admin/super_user/index.html.slime", fn file ->
         assert file =~ "h2 Listing super users"
         assert file =~ "th Name"
         assert file =~ "= for super_user <- @super_users do"
       end
 
-      assert_file "web/templates/admin/super_user/new.html.slim", fn file ->
+      assert_file "web/templates/admin/super_user/new.html.slime", fn file ->
         assert file =~ "h2 New super user"
         assert file =~ "action: super_user_path(@conn, :create)"
       end
 
-      assert_file "web/templates/admin/super_user/show.html.slim", fn file ->
+      assert_file "web/templates/admin/super_user/show.html.slime", fn file ->
         assert file =~ "h2 Show super user"
         assert file =~ "strong Name:"
         assert file =~ "= @super_user.name"
@@ -185,30 +185,30 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.SlimeTest do
       refute File.exists? "web/models/admin/user.ex"
       assert [] = Path.wildcard("priv/repo/migrations/*_create_admin_user.exs")
 
-      assert_file "web/templates/admin/user/form.html.slim", fn file ->
+      assert_file "web/templates/admin/user/form.html.slime", fn file ->
         refute file =~ ~s(--no-model)
       end
     end
   end
 
-  describe "when :use_slime_extension env is set to true" do
+  describe "when :use_slim_extension env is set to true" do
     setup do
-      Application.put_env(:phoenix_slime, :use_slime_extension, true)
+      Application.put_env(:phoenix_slime, :use_slim_extension, true)
       on_exit fn ->
-        Application.delete_env(:phoenix_slime, :use_slime_extension)
+        Application.delete_env(:phoenix_slime, :use_slim_extension)
       end
       :ok
     end
 
-    test "generates files with .slime extension " do
-      in_tmp "generates .slime", fn ->
+    test "generates files with .slim extension " do
+      in_tmp "generates .slim", fn ->
         Mix.Tasks.Phoenix.Gen.Html.Slime.run ["User", "users"]
 
-        assert File.exists? "web/templates/user/edit.html.slime"
-        assert File.exists? "web/templates/user/form.html.slime"
-        assert File.exists? "web/templates/user/index.html.slime"
-        assert File.exists? "web/templates/user/new.html.slime"
-        assert File.exists? "web/templates/user/show.html.slime"
+        assert File.exists? "web/templates/user/edit.html.slim"
+        assert File.exists? "web/templates/user/form.html.slim"
+        assert File.exists? "web/templates/user/index.html.slim"
+        assert File.exists? "web/templates/user/new.html.slim"
+        assert File.exists? "web/templates/user/show.html.slim"
       end
     end
   end
