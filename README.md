@@ -49,11 +49,17 @@ This library also includes two `mix` tasks:
 `mix phoenix.gen.layout.slime`
 
 The first task creates a html resource in the same way `phoenix.gen.html` does
-with the exception that all files are `.slim` files instead of `.eex` files.
+with the exception that all files are `.slime` files instead of `.eex` files.
 
-The second task creates a new `web/templates/layout/app.html.slim` with the
+The second task creates a new `web/templates/layout/app.html.slime` with the
 exact same content as the `app.html.eex` file. Do not forget to remove the old
 `app.html.eex` file.
+
+Generated files have `.slime` extension by default. If you prefer `.slim`, you could add the following line to your config:
+
+```elixir
+config :phoenix_slime, :use_slim_extension, true
+```
 
 ## License
 

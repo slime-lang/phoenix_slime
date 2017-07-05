@@ -13,13 +13,14 @@ defmodule Mix.Tasks.Phoenix.Gen.Layout.Slime do
 
     binding = [application_module: "ApplicationName"]
 
+    extension = PhoenixSlime.ConfiguredExtension.file_extension
     Mix.Phoenix.copy_from slime_paths(), "priv/templates/phoenix.gen.layout.slime", "", binding, [
-      {:eex, "app.html.eex",       "web/templates/layout/app.html.slim"}
+      {:eex, "app.html.eex",       "web/templates/layout/app.html.#{extension}"}
     ]
 
     instructions = """
 
-    A new web/templates/layout/app.html.slim file was generated. 
+    A new web/templates/layout/app.html.#{extension} file was generated.
     """
     Mix.shell.info instructions
   end
