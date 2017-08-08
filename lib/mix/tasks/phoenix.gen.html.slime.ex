@@ -51,14 +51,14 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
     Mix.Phoenix.check_module_name_availability!(binding[:module] <> "Controller")
     Mix.Phoenix.check_module_name_availability!(binding[:module] <> "View")
 
-    Mix.Phoenix.copy_from paths(), "priv/templates/phoenix.gen.html", "", binding, [
+    Mix.Phoenix.copy_from paths(), "priv/templates/phoenix.gen.html", binding, [
       {:eex, "controller.ex",       "web/controllers/#{path}_controller.ex"},
       {:eex, "view.ex",             "web/views/#{path}_view.ex"},
       {:eex, "controller_test.exs", "test/controllers/#{path}_controller_test.exs"},
     ]
 
     extension = PhoenixSlime.ConfiguredExtension.file_extension
-    Mix.Phoenix.copy_from slime_paths(), "priv/templates/phoenix.gen.html.slime", "", binding, [
+    Mix.Phoenix.copy_from slime_paths(), "priv/templates/phoenix.gen.html.slime", binding, [
       {:eex, "edit.html.eex",       "web/templates/#{path}/edit.html.#{extension}"},
       {:eex, "form.html.eex",       "web/templates/#{path}/form.html.#{extension}"},
       {:eex, "index.html.eex",      "web/templates/#{path}/index.html.#{extension}"},

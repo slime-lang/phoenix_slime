@@ -14,7 +14,7 @@ defmodule Mix.Tasks.Phoenix.Gen.Layout.Slime do
     binding = [application_module: "ApplicationName"]
 
     extension = PhoenixSlime.ConfiguredExtension.file_extension
-    Mix.Phoenix.copy_from slime_paths(), "priv/templates/phoenix.gen.layout.slime", "", binding, [
+    Mix.Phoenix.copy_from slime_paths(), "priv/templates/phoenix.gen.layout.slime", binding, [
       {:eex, "app.html.eex",       "web/templates/layout/app.html.#{extension}"}
     ]
 
