@@ -1,0 +1,19 @@
+h2 Listing <%= schema.human_plural %>
+
+table.table
+  thead
+    tr
+<%= for {k, _} <- schema.attrs do %>      th <%= Phoenix.Naming.humanize(Atom.to_string(k)) %>
+<% end %>      th
+  tbody
+    = for <%= schema.singular %> <- @<%= schema.plural %> do
+      tr
+<%= for {k, _} <- schema.attrs do %>        td= <%= schema.singular %>.<%= k %>
+<% end %>        td class="text-right"
+          = link "Show", to: <%= schema.route_helper %>_path(@conn, :show, <%= schema.singular %>), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Edit", to: <%= schema.route_helper %>_path(@conn, :edit, <%= schema.singular %>), class: "btn btn-default btn-xs"
+          | &nbsp;
+          = link "Delete", to: <%= schema.route_helper %>_path(@conn, :delete, <%= schema.singular %>), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs"
+
+= link "New <%= schema.human_singular %>", to: <%= schema.route_helper %>_path(@conn, :new)

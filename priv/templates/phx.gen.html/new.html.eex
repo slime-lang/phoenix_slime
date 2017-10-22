@@ -1,0 +1,5 @@
+h2 New <%= schema.human_singular %>
+
+= render "form.html", Map.puts(assigns, action: <%= schema.singular %>_path(@conn, :create))
+
+= link "Back", to: <%= schema.route_helper %>_path(@conn, :index)
