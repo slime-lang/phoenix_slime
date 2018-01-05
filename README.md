@@ -13,8 +13,8 @@
 
 ## Usage
 
-  1. Add `{:phoenix_slime, "~> 0.8.0"}` to your deps in `mix.exs`.
-  2. Add the following your Phoenix `config/config.exs`:
+  1. Add `{:phoenix_slime, "~> 0.9.0"}` to your deps in `mix.exs`.
+  2. Add the following to your Phoenix `config/config.exs`:
 
 ```elixir
   config :phoenix, :template_engines,
