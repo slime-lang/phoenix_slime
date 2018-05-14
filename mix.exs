@@ -7,9 +7,7 @@ defmodule PhoenixSlime.Mixfile do
     [
       app: :phoenix_slime,
       deps: deps(),
-      description: """
-      Phoenix Template Engine for Slim-like templates
-      """,
+      description: "Phoenix Template Engine for Slim-like templates",
       elixir: "~> 1.4",
       package: package(),
       version: @version]

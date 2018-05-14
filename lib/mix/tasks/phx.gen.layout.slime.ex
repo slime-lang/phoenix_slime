@@ -14,7 +14,8 @@ defmodule Mix.Tasks.Phx.Gen.Layout.Slime do
     web_prefix = Mix.Phoenix.web_path(context_app)
     binding = [application_module: Mix.Phoenix.base()]
 
-    extension = PhoenixSlime.ConfiguredExtension.file_extension
+    extension = PhoenixSlime.ConfiguredExtension.file_extension()
+
     Mix.Phoenix.copy_from(slime_paths(), "priv/templates/phoenix.gen.layout.slime", binding, [
       {:eex, "app.html.eex", "#{web_prefix}/templates/layout/app.html.#{extension}"}
     ])
@@ -23,7 +24,8 @@ defmodule Mix.Tasks.Phx.Gen.Layout.Slime do
 
     A new #{web_prefix}/templates/layout/app.html.#{extension} file was generated.
     """
-    Mix.shell.info instructions
+
+    Mix.shell().info(instructions)
   end
 
   defp slime_paths do
