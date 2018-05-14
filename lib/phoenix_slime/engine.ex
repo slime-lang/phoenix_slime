@@ -12,7 +12,7 @@ defmodule PhoenixSlime.Engine do
 
   defp read!(file_path) do
     file_path
-    |> File.read!
-    |> Slime.Renderer.precompile
+    |> File.read!()
+    |> Slime.Renderer.precompile()
   end
 end

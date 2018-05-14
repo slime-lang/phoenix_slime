@@ -105,9 +105,10 @@ defmodule Mix.Tasks.Phx.Gen.Html.Slime do
 
   @doc false
   def run(args) do
-    if Mix.Project.umbrella? do
-      Mix.raise "mix phx.gen.html.slime can only be run inside an application directory"
+    if Mix.Project.umbrella?() do
+      Mix.raise("mix phx.gen.html.slime can only be run inside an application directory")
     end
+
     {context, schema} = Gen.Context.build(args)
     binding = [context: context, schema: schema, inputs: inputs(schema)]
     paths = [".", :phoenix_slime, :phoenix]
@@ -125,9 +126,11 @@ defmodule Mix.Tasks.Phx.Gen.Html.Slime do
     |> Kernel.++(context_files(context))
     |> Mix.Phoenix.prompt_for_conflicts()
   end
+
   defp context_files(%Context{generate?: true} = context) do
     Gen.Context.files_to_be_generated(context)
   end
+
   defp context_files(%Context{generate?: false}) do
     []
   end
@@ -136,10 +139,10 @@ defmodule Mix.Tasks.Phx.Gen.Html.Slime do
   def files_to_be_generated(context) do
     to_gen = Mix.Tasks.Phx.Gen.Html.files_to_be_generated(context)
 
-    extension = PhoenixSlime.ConfiguredExtension.file_extension
+    extension = PhoenixSlime.ConfiguredExtension.file_extension()
 
-    Enum.map(to_gen, fn
-      {type, name, path} -> {type, name, String.replace_suffix(path, "eex", extension)}
+    Enum.map(to_gen, fn {type, name, path} ->
+      {type, name, String.replace_suffix(path, "eex", extension)}
     end)
   end
 
@@ -155,31 +158,43 @@ defmodule Mix.Tasks.Phx.Gen.Html.Slime do
     Enum.map(attrs, fn
       {_, {:array, _}} ->
         {nil, nil, nil}
+
       {_, {:references, _}} ->
         {nil, nil, nil}
-      {key, :integer}    ->
+
+      {key, :integer} ->
         {label(key), ~s(= number_input f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :float}      ->
-        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"), error(key)}
-      {key, :decimal}    ->
-        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"), error(key)}
-      {key, :boolean}    ->
+
+      {key, :float} ->
+        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"),
+         error(key)}
+
+      {key, :decimal} ->
+        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"),
+         error(key)}
+
+      {key, :boolean} ->
         {label(key), ~s(= checkbox f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :text}       ->
+
+      {key, :text} ->
         {label(key), ~s(= textarea f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :date}       ->
+
+      {key, :date} ->
         {label(key), ~s(= date_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :time}       ->
+
+      {key, :time} ->
         {label(key), ~s(= time_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :utc_datetime}   ->
+
+      {key, :utc_datetime} ->
         {label(key), ~s(= datetime_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :naive_datetime}   ->
+
+      {key, :naive_datetime} ->
         {label(key), ~s(= datetime_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, _}           ->
+
+      {key, _} ->
         {label(key), ~s(= text_input f, #{inspect(key)}, class: "form-control"), error(key)}
     end)
   end
-
 
   defp label(key) do
     ~s(= label f, #{inspect(key)}, class: "control-label")

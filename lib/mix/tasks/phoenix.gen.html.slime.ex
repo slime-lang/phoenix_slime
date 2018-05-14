@@ -37,34 +37,43 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
     default_opts = Application.get_env(:phoenix, :generators, [])
     opts = Keyword.merge(default_opts, opts)
 
-    attrs   = Mix.Phoenix.Schema.attrs(attrs)
+    attrs = Mix.Phoenix.Schema.attrs(attrs)
     binding = Mix.Phoenix.inflect(singular)
-    path    = binding[:path]
-    route   = String.split(path, "/") |> Enum.drop(-1) |> Kernel.++([plural]) |> Enum.join("/")
-    binding = binding ++ [plural: plural, route: route, attrs: attrs,
-                          binary_id: opts[:binary_id],
-                          sample_id: sample_id(opts),
-                          inputs: inputs(attrs), params: Mix.Phoenix.Schema.params(attrs),
-                          template_singular: String.replace(binding[:singular], "_", " "),
-                          template_plural: String.replace(plural, "_", " ")]
+    path = binding[:path]
+    route = String.split(path, "/") |> Enum.drop(-1) |> Kernel.++([plural]) |> Enum.join("/")
+
+    binding =
+      binding ++
+        [
+          plural: plural,
+          route: route,
+          attrs: attrs,
+          binary_id: opts[:binary_id],
+          sample_id: sample_id(opts),
+          inputs: inputs(attrs),
+          params: Mix.Phoenix.Schema.params(attrs),
+          template_singular: String.replace(binding[:singular], "_", " "),
+          template_plural: String.replace(plural, "_", " ")
+        ]
 
     Mix.Phoenix.check_module_name_availability!(binding[:module] <> "Controller")
     Mix.Phoenix.check_module_name_availability!(binding[:module] <> "View")
 
-    Mix.Phoenix.copy_from paths(), "priv/templates/phoenix.gen.html", binding, [
-      {:eex, "controller.ex",       "web/controllers/#{path}_controller.ex"},
-      {:eex, "view.ex",             "web/views/#{path}_view.ex"},
-      {:eex, "controller_test.exs", "test/controllers/#{path}_controller_test.exs"},
-    ]
+    Mix.Phoenix.copy_from(paths(), "priv/templates/phoenix.gen.html", binding, [
+      {:eex, "controller.ex", "web/controllers/#{path}_controller.ex"},
+      {:eex, "view.ex", "web/views/#{path}_view.ex"},
+      {:eex, "controller_test.exs", "test/controllers/#{path}_controller_test.exs"}
+    ])
 
-    extension = PhoenixSlime.ConfiguredExtension.file_extension
-    Mix.Phoenix.copy_from slime_paths(), "priv/templates/phoenix.gen.html.slime", binding, [
-      {:eex, "edit.html.eex",       "web/templates/#{path}/edit.html.#{extension}"},
-      {:eex, "form.html.eex",       "web/templates/#{path}/form.html.#{extension}"},
-      {:eex, "index.html.eex",      "web/templates/#{path}/index.html.#{extension}"},
-      {:eex, "new.html.eex",        "web/templates/#{path}/new.html.#{extension}"},
-      {:eex, "show.html.eex",       "web/templates/#{path}/show.html.#{extension}"},
-    ]
+    extension = PhoenixSlime.ConfiguredExtension.file_extension()
+
+    Mix.Phoenix.copy_from(slime_paths(), "priv/templates/phoenix.gen.html.slime", binding, [
+      {:eex, "edit.html.eex", "web/templates/#{path}/edit.html.#{extension}"},
+      {:eex, "form.html.eex", "web/templates/#{path}/form.html.#{extension}"},
+      {:eex, "index.html.eex", "web/templates/#{path}/index.html.#{extension}"},
+      {:eex, "new.html.eex", "web/templates/#{path}/new.html.#{extension}"},
+      {:eex, "show.html.eex", "web/templates/#{path}/show.html.#{extension}"}
+    ])
 
     instructions = """
 
@@ -74,9 +83,9 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
     """
 
     if opts[:model] != false do
-      Mix.Task.run "phoenix.gen.model", ["--instructions", instructions|args]
+      Mix.Task.run("phoenix.gen.model", ["--instructions", instructions | args])
     else
-      Mix.shell.info instructions
+      Mix.shell().info(instructions)
     end
   end
 
@@ -92,8 +101,12 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
     cond do
       String.contains?(plural, ":") ->
         raise_with_help()
+
       plural != Phoenix.Naming.underscore(plural) ->
-        Mix.raise "Expected the second argument, #{inspect plural}, to be all lowercase using snake_case convention"
+        Mix.raise(
+          "Expected the second argument, #{inspect(plural)}, to be all lowercase using snake_case convention"
+        )
+
       true ->
         args
     end
@@ -104,41 +117,54 @@ defmodule Mix.Tasks.Phoenix.Gen.Html.Slime do
   end
 
   defp raise_with_help do
-    Mix.raise """
+    Mix.raise("""
     mix phoenix_slime.gen.html expects both singular and plural names
     of the generated resource followed by any number of attributes:
 
         mix phoenix_slime.gen.html User users name:string
-    """
+    """)
   end
 
   defp inputs(attrs) do
-    Enum.map attrs, fn
+    Enum.map(attrs, fn
       {_, {:array, _}} ->
         {nil, nil, nil}
+
       {_, {:references, _}} ->
         {nil, nil, nil}
-      {key, :integer}    ->
+
+      {key, :integer} ->
         {label(key), ~s(= number_input f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :float}      ->
-        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"), error(key)}
-      {key, :decimal}    ->
-        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"), error(key)}
-      {key, :boolean}    ->
+
+      {key, :float} ->
+        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"),
+         error(key)}
+
+      {key, :decimal} ->
+        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"),
+         error(key)}
+
+      {key, :boolean} ->
         {label(key), ~s(= checkbox f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :text}       ->
+
+      {key, :text} ->
         {label(key), ~s(= textarea f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :date}       ->
+
+      {key, :date} ->
         {label(key), ~s(= date_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :time}       ->
+
+      {key, :time} ->
         {label(key), ~s(= time_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :utc_datetime}   ->
+
+      {key, :utc_datetime} ->
         {label(key), ~s(= datetime_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, :naive_datetime}   ->
+
+      {key, :naive_datetime} ->
         {label(key), ~s(= datetime_select f, #{inspect(key)}, class: "form-control"), error(key)}
-      {key, _}           ->
+
+      {key, _} ->
         {label(key), ~s(= text_input f, #{inspect(key)}, class: "form-control"), error(key)}
-    end
+    end)
   end
 
   defp label(key) do
