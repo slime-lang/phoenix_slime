@@ -30,7 +30,7 @@ defmodule Mix.Tasks.Phx.Gen.Html.SlimeTest do
       assert [_] = Path.wildcard("priv/repo/migrations/*_create_users.exs")
 
       assert_file "lib/phoenix_slime_web/templates/user/edit.html.slime", fn file ->
-        assert file =~ "action: user_path(@conn, :update, @user)"
+        assert file =~ ":action, user_path(@conn, :update, @user)"
       end
 
       assert_file "lib/phoenix_slime_web/templates/user/form.html.slime", fn file ->
@@ -59,7 +59,7 @@ defmodule Mix.Tasks.Phx.Gen.Html.SlimeTest do
       end
 
       assert_file "lib/phoenix_slime_web/templates/user/new.html.slime", fn file ->
-        assert file =~ "action: user_path(@conn, :create)"
+        assert file =~ ":action, user_path(@conn, :create)"
       end
 
       assert_file "lib/phoenix_slime_web/templates/user/show.html.slime", fn file ->
