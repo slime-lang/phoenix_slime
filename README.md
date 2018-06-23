@@ -13,7 +13,7 @@
 
 ## Usage
 
-  1. Add `{:phoenix_slime, "~> 0.9.0"}` to your deps in `mix.exs`.
+  1. Add `{:phoenix_slime, "~> 0.10.0"}` to your deps in `mix.exs`.
   2. Add the following to your Phoenix `config/config.exs`:
 
 ```elixir
@@ -27,7 +27,7 @@ An example project can be found at [slime-lang/phoenix_slime_example][phoenix_sl
 [phoenix_slime_example]: https://github.com/slime-lang/phoenix_slime_example
 
 ## Live Reloader
-In `my_app/config/dev.exs`, include the `slim` and `slime` extensions in the list of watched files.
+In `my_app/config/dev.exs`, include the `slim` and `slime` extensions in the list of watched files. (Replace `APP` with your app name.)
 
 ```elixir
 # Watch static and templates for browser reloading.
@@ -36,7 +36,7 @@ config :my_app, MyApp.Endpoint,
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
       ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex|slim|slime)$}
+      ~r{lib/APP_web/templates/.*(eex|slim|slime)$}
     ]
   ]
 ```
@@ -45,13 +45,13 @@ config :my_app, MyApp.Endpoint,
 
 This library also includes two `mix` tasks:
 
-`mix phoenix.gen.html.slime`
-`mix phoenix.gen.layout.slime`
+`mix phx.gen.html.slime`
+`mix phx.gen.layout.slime`
 
-The first task creates a html resource in the same way `phoenix.gen.html` does
+The first task creates a html resource in the same way `phx.gen.html` does
 with the exception that all files are `.slime` files instead of `.eex` files.
 
-The second task creates a new `web/templates/layout/app.html.slime` with the
+The second task creates a new `lib/APP_web/templates/layout/app.html.slime` with the
 exact same content as the `app.html.eex` file. Do not forget to remove the old
 `app.html.eex` file.
 
