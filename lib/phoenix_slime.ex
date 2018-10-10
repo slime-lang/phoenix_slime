@@ -1,8 +1,29 @@
 defmodule PhoenixSlime do
+  @doc """
+  Provides the `~l` sigil with HTML safe Slime syntax inside source files.
+
+  Raises on attempts to interpolate with `\#{}`. Use `~L` to interpolate.
+
+      iex> import PhoenixSlime
+      iex> assigns = %{w: "world"}
+      iex> ~l"\""
+      ...> p = "hello " <> @w
+      ...> "\""
+      {:safe, [[["" | "<p>"] | "hello world"] | "</p>"]}
+  """
   defmacro sigil_l(expr, opts) do
     handle_sigil(expr, opts, __CALLER__.line)
   end
 
+  @doc """
+  Provides the `~L` sigil with HTML safe Slime syntax inside source files.
+
+      iex> import PhoenixSlime
+      iex> ~L"\""
+      ...> p hello #{"world"}
+      ...> "\""
+      {:safe, [[["" | "<p>hello "] | "world"] | "</p>"]}
+  """
   defmacro sigil_L(expr, opts) do
     handle_sigil(expr, opts, __CALLER__.line)
   end
