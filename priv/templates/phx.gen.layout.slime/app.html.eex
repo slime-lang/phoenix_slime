@@ -7,7 +7,7 @@ html lang="en"
     meta content="" name="description"
     meta content="" name="author"
     title Hello <%= application_module %>!
-    link rel="stylesheet" href="#{static_path(@conn, "/css/app.css")}"
+    link rel="stylesheet" href="#{Routes.static_path(@conn, "/css/app.css")}"
 
   body
     .container
@@ -24,4 +24,4 @@ html lang="en"
       main role="main"
         = render @view_module, @view_template, assigns
 
-    script src="#{static_path(@conn, "/js/app.js")}"
+    script src="#{Routes.static_path(@conn, "/js/app.js")}"
