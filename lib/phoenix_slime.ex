@@ -20,7 +20,7 @@ defmodule PhoenixSlime do
 
       iex> import PhoenixSlime
       iex> ~L"\""
-      ...> p hello #{"world"}
+      ...> p hello \#{"world"}
       ...> "\""
       {:safe, ["" | "<p>hello world</p>"]}
   """
