@@ -16,7 +16,7 @@ defmodule Mix.Tasks.Phx.Gen.Layout.Slime do
 
     extension = PhoenixSlime.ConfiguredExtension.file_extension()
 
-    Mix.Phoenix.copy_from(slime_paths(), "priv/templates/phoenix.gen.layout.slime", binding, [
+    Mix.Phoenix.copy_from(slime_paths(), "priv/templates/phx.gen.layout.slime", binding, [
       {:eex, "app.html.eex", "#{web_prefix}/templates/layout/app.html.#{extension}"}
     ])
 

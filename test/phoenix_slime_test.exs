@@ -9,11 +9,14 @@ defmodule PhoenixSlimeTest do
   end
 
   test "render a slime template with layout" do
-    html = View.render(MyApp.PageView, "new.html",
-      message: "hi",
-      layout: {MyApp.PageView, "application.html"}
-    )
-    assert html == {:safe, [[["" | "<html><body>"], "" | "<h2>New Template</h2>"] | "</body></html>"]}
+    html =
+      View.render(MyApp.PageView, "new.html",
+        message: "hi",
+        layout: {MyApp.PageView, "application.html"}
+      )
+
+    assert html ==
+             {:safe, [[["" | "<html><body>"], "" | "<h2>New Template</h2>"] | "</body></html>"]}
   end
 
   test "render a slime template without layout" do

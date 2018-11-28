@@ -5,6 +5,6 @@ ul
     strong <%= Phoenix.Naming.humanize(Atom.to_string(k)) %>:&nbsp;
     = @<%= schema.singular %>.<%= k %>
 <% end %>
-= link "Edit", to: <%= schema.route_helper %>_path(@conn, :edit, @<%= schema.singular %>)
+= link "Edit", to: Routes.<%= schema.route_helper %>_path(@conn, :edit, @<%= schema.singular %>)
 | &nbsp;
-= link "Back", to: <%= schema.route_helper %>_path(@conn, :index)
+= link "Back", to: Routes.<%= schema.route_helper %>_path(@conn, :index)
