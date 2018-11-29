@@ -2,7 +2,7 @@ defmodule PhoenixSlime do
   @doc """
   Provides the `~l` sigil with HTML safe Slime syntax inside source files.
 
-  Raises on attempts to interpolate with `\#{}`. Use `~L` to interpolate.
+  Raises on attempts to use `\#{}`. Use `~L` to allow templating with `\#{}`.
 
       iex> import PhoenixSlime
       iex> assigns = %{w: "world"}
@@ -35,8 +35,8 @@ defmodule PhoenixSlime do
   end
 
   defp handle_sigil(_, _, _) do
-    raise ArgumentError, "Interpolation is not allowed in ~l sigil." <>
-      "Remove the interpolation, use = to insert values, or " <>
-        "use ~L to interpolate."
+    raise ArgumentError, ~S(Templating is not allowed with #{} in ~l sigil.) <>
+      ~S( Remove the #{}, use = to insert values, or ) <>
+        ~S(use ~L to template with #{}.)
   end
 end
