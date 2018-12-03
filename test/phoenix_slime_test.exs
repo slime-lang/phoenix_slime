@@ -1,6 +1,7 @@
 defmodule PhoenixSlimeTest do
   use ExUnit.Case
   alias Phoenix.View
+  doctest PhoenixSlime
 
   defmodule MyApp.PageView do
     use Phoenix.View, root: "test/fixtures/templates"
