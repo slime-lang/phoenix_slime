@@ -1,7 +1,7 @@
 defmodule PhoenixSlime.Mixfile do
   use Mix.Project
 
-  @version "0.10.1"
+  @version "0.11.0"
 
   def project do
     [
@@ -31,7 +31,7 @@ defmodule PhoenixSlime.Mixfile do
 
   defp package do
     [
-      maintainers: ["Sean Callan"],
+      maintainers: ["Sean Callan", "Alexander Stanko"],
       files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
       licenses: ["MIT"],
       links: %{github: "https://github.com/slime-lang/phoenix_slime"}
