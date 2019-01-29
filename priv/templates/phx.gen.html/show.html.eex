@@ -1,10 +1,9 @@
-h2 Show <%= schema.human_singular %>
+h1 Show <%= schema.human_singular %>
 
 ul
 <%= for {k, _} <- schema.attrs do %>  li
     strong <%= Phoenix.Naming.humanize(Atom.to_string(k)) %>:&nbsp;
     = @<%= schema.singular %>.<%= k %>
 <% end %>
-= link "Edit", to: Routes.<%= schema.route_helper %>_path(@conn, :edit, @<%= schema.singular %>)
-| &nbsp;
-= link "Back", to: Routes.<%= schema.route_helper %>_path(@conn, :index)
+span= link "Edit", to: Routes.<%= schema.route_helper %>_path(@conn, :edit, @<%= schema.singular %>)
+span= link "Back", to: Routes.<%= schema.route_helper %>_path(@conn, :index)
