@@ -14,7 +14,7 @@ defmodule Mix.Tasks.Phx.Gen.Layout.SlimeTest do
       Mix.Tasks.Phx.Gen.Layout.Slime.run([])
 
       assert_file("lib/phoenix_slime_web/templates/layout/app.html.slime", fn file ->
-        assert file =~ "Hello PhoenixSlime"
+        assert file =~ "PhoenixSlime · Phoenix Framework"
         assert file =~ "p.alert.alert-info"
         assert file =~ "p.alert.alert-danger"
       end)
