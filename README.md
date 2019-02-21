@@ -4,7 +4,7 @@
 
 > Powered by [Slime](https://github.com/slime-lang/slime)
 
-[travis-img]: https://travis-ci.org/slime-lang/phoenix_slime.png?branch=master
+[travis-img]: https://travis-ci.org/slime-lang/phoenix_slime.svg?branch=master
 [travis]: https://travis-ci.org/slime-lang/phoenix_slime
 [hex-img]: https://img.shields.io/hexpm/v/phoenix_slime.svg
 [hex]: https://hex.pm/packages/phoenix_slime
