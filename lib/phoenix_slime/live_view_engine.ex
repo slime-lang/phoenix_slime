@@ -1,4 +1,4 @@
-defmodule PhoenixSlime.Engine do
+defmodule PhoenixSlime.LiveViewEngine do
   @behaviour Phoenix.Template.Engine
 
   @doc """
@@ -7,7 +7,7 @@ defmodule PhoenixSlime.Engine do
   def compile(path, _name) do
     path
     |> read!()
-    |> EEx.compile_string(engine: Phoenix.HTML.Engine, file: path, line: 1)
+    |> EEx.compile_string(engine: Phoenix.LiveView.Engine, file: path, line: 1)
   end
 
   defp read!(file_path) do
