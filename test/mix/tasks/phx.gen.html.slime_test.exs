@@ -23,8 +23,8 @@ defmodule Mix.Tasks.Phx.Gen.Html.SlimeTest do
            alarm:time address_id:references:addresses))
 
       assert_file("lib/phoenix_slime/accounts/user.ex")
-      assert_file("lib/phoenix_slime/accounts/accounts.ex")
-      assert_file("test/phoenix_slime/accounts/accounts_test.exs")
+      assert_file("lib/phoenix_slime/accounts.ex")
+      assert_file("test/phoenix_slime/accounts_test.exs")
       assert [_] = Path.wildcard("priv/repo/migrations/*_create_users.exs")
 
       assert_file("lib/phoenix_slime_web/templates/user/edit.html.slime", fn file ->
