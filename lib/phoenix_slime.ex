@@ -35,8 +35,9 @@ defmodule PhoenixSlime do
   end
 
   defp handle_sigil(_, _, _) do
-    raise ArgumentError, ~S(Templating is not allowed with #{} in ~l sigil.) <>
-      ~S( Remove the #{}, use = to insert values, or ) <>
-        ~S(use ~L to template with #{}.)
+    raise ArgumentError,
+          ~S(Templating is not allowed with #{} in ~l sigil.) <>
+            ~S( Remove the #{}, use = to insert values, or ) <>
+            ~S(use ~L to template with #{}.)
   end
 end
