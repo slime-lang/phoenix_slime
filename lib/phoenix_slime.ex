@@ -9,7 +9,7 @@ defmodule PhoenixSlime do
       iex> ~l"\""
       ...> p = "hello " <> @w
       ...> "\""
-      {:safe, [[["" | "<p>"] | "hello world"] | "</p>"]}
+      {:safe, ["<p>", "hello world", "</p>"]}
   """
   defmacro sigil_l(expr, opts) do
     handle_sigil(expr, opts, __CALLER__.line)
@@ -22,7 +22,7 @@ defmodule PhoenixSlime do
       iex> ~L"\""
       ...> p hello \#{"world"}
       ...> "\""
-      {:safe, [[["" | "<p>hello "] | "world" ] | "</p>"]}
+      {:safe, ["<p>hello ", "world", "</p>"]}
   """
   defmacro sigil_L(expr, opts) do
     handle_sigil(expr, opts, __CALLER__.line)
