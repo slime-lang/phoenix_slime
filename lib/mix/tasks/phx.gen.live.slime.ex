@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Phx.Gen.Live do
+defmodule Mix.Tasks.Phx.Gen.Live.Slime do
   @shortdoc "Generates LiveView, templates, and context for a resource"
 
   @moduledoc """
@@ -86,6 +86,9 @@ defmodule Mix.Tasks.Phx.Gen.Live do
   alias Mix.Phoenix.{Context}
   alias Mix.Tasks.Phx.Gen
 
+  import Mix.Tasks.Phx.Gen.Live, only: [print_shell_instructions: 1]
+  import Mix.Tasks.Phx.Gen.Html.Slime, only: [inputs: 1, label: 1, error: 1]
+
   @doc false
   def run(args) do
     if Mix.Project.umbrella?() do
@@ -112,30 +115,24 @@ defmodule Mix.Tasks.Phx.Gen.Live do
     |> Kernel.++(context_files(context))
     |> Mix.Phoenix.prompt_for_conflicts()
   end
+
   defp context_files(%Context{generate?: true} = context) do
     Gen.Context.files_to_be_generated(context)
   end
+
   defp context_files(%Context{generate?: false}) do
     []
   end
 
-  defp files_to_be_generated(%Context{schema: schema, context_app: context_app}) do
-    web_prefix = Mix.Phoenix.web_path(context_app)
-    test_prefix = Mix.Phoenix.web_test_path(context_app)
-    web_path = to_string(schema.web_path)
-    live_subdir = "#{schema.singular}_live"
+  @doc false
+  def files_to_be_generated(context) do
+    to_gen = Mix.Tasks.Phx.Gen.Live.files_to_be_generated(context)
 
-    [
-      {:eex, "show.ex",                   Path.join([web_prefix, "live", web_path, live_subdir, "show.ex"])},
-      {:eex, "index.ex",                  Path.join([web_prefix, "live", web_path, live_subdir, "index.ex"])},
-      {:eex, "form_component.ex",         Path.join([web_prefix, "live", web_path, live_subdir, "form_component.ex"])},
-      {:eex, "form_component.html.leex",  Path.join([web_prefix, "live", web_path, live_subdir, "form_component.html.leex"])},
-      {:eex, "index.html.leex",           Path.join([web_prefix, "live", web_path, live_subdir, "index.html.leex"])},
-      {:eex, "show.html.leex",            Path.join([web_prefix, "live", web_path, live_subdir, "show.html.leex"])},
-      {:eex, "live_test.exs",             Path.join([test_prefix, "live", web_path, "#{schema.singular}_live_test.exs"])},
-      {:new_eex, "modal_component.ex",    Path.join([web_prefix, "live", "modal_component.ex"])},
-      {:new_eex, "live_helpers.ex",       Path.join([web_prefix, "live", "live_helpers.ex"])},
-    ]
+    new_extension = "slimleex"
+
+    Enum.map(to_gen, fn {type, name, path} ->
+      {type, name, String.replace_suffix(path, "leex", new_extension)}
+    end)
   end
 
   defp copy_new_files(%Context{} = context, binding, paths) do
@@ -183,34 +180,6 @@ defmodule Mix.Tasks.Phx.Gen.Live do
       and that both functions import #{inspect(context.web_module)}.LiveHelpers.
       """
     end
-  end
-
-  @doc false
-  def print_shell_instructions(%Context{schema: schema, context_app: ctx_app} = context) do
-    prefix = Module.concat(context.web_module, schema.web_namespace)
-    web_path = Mix.Phoenix.web_path(ctx_app)
-
-    if schema.web_namespace do
-      Mix.shell().info """
-
-      Add the live routes to your #{schema.web_namespace} :browser scope in #{web_path}/router.ex:
-
-          scope "/#{schema.web_path}", #{inspect prefix}, as: :#{schema.web_path} do
-            pipe_through :browser
-            ...
-
-      #{for line <- live_route_instructions(schema), do: "      #{line}"}
-          end
-      """
-    else
-      Mix.shell().info """
-
-      Add the live routes to your browser scope in #{Mix.Phoenix.web_path(ctx_app)}/router.ex:
-
-      #{for line <- live_route_instructions(schema), do: "    #{line}"}
-      """
-    end
-    if context.generate?, do: Gen.Context.print_shell_instructions(context)
   end
 
   defp live_route_instructions(schema) do
