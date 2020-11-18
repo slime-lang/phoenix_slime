@@ -17,14 +17,14 @@ table
       th
   tbody id="<%= schema.plural %>"
     = for <%= schema.singular %> <- @<%= schema.collection %> do
-    tr id="<%= schema.singular %>-#{<%= schema.singular %>.id}"
-      <%= for {k, _} <- schema.attrs do %>
-      td = <%= schema.singular %>.<%= k %>
-      <% end %>
-      td
-        span = live_redirect "Show", to: Routes.<%= schema.route_helper %>_show_path(@socket, :show, <%= schema.singular %>)
-        span = live_patch "Edit", to: Routes.<%= schema.route_helper %>_index_path(@socket, :edit, <%= schema.singular %>)
-        span = link "Delete", to: "#", phx_click: "delete", phx_value_id: <%= schema.singular %>.id, data: [confirm: "Are you sure?"]
+      tr id="<%= schema.singular %>-#{<%= schema.singular %>.id}"
+        <%= for {k, _} <- schema.attrs do %>
+        td = <%= schema.singular %>.<%= k %>
+        <% end %>
+        td
+          span = live_redirect "Show", to: Routes.<%= schema.route_helper %>_show_path(@socket, :show, <%= schema.singular %>)
+          span = live_patch "Edit", to: Routes.<%= schema.route_helper %>_index_path(@socket, :edit, <%= schema.singular %>)
+          span = link "Delete", to: "#", phx_click: "delete", phx_value_id: <%= schema.singular %>.id, data: [confirm: "Are you sure?"]
 
 
 span = live_patch "New <%= schema.human_singular %>", to: Routes.<%= schema.route_helper %>_index_path(@socket, :new)
