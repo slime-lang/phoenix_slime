@@ -83,23 +83,22 @@ defmodule Mix.Tasks.Phx.Gen.Live.Slime do
   """
   use Mix.Task
 
-  alias Mix.Phoenix.{Context}
+  alias Mix.Phoenix.{Context,Schema}
   alias Mix.Tasks.Phx.Gen
 
   import Mix.Tasks.Phx.Gen.Live, only: [print_shell_instructions: 1]
-  import Mix.Tasks.Phx.Gen.Html.Slime, only: [inputs: 1, label: 1, error: 1]
 
   @doc false
   def run(args) do
     if Mix.Project.umbrella?() do
-      Mix.raise "mix phx.gen.live.slime must be invoked from within your *_web application root directory"
+      Mix.raise "mix phx.gen.live must be invoked from within your *_web application root directory"
     end
 
     {context, schema} = Gen.Context.build(args)
     Gen.Context.prompt_for_code_injection(context)
 
-    binding = [context: context, schema: schema, inputs: Gen.Html.inputs(schema)]
-    paths = Mix.Phoenix.generator_paths()
+    binding = [context: context, schema: schema, inputs: inputs(schema)]
+    paths = [".", :phoenix_slime, :phoenix]
 
     prompt_for_conflicts(context)
 
@@ -115,29 +114,35 @@ defmodule Mix.Tasks.Phx.Gen.Live.Slime do
     |> Kernel.++(context_files(context))
     |> Mix.Phoenix.prompt_for_conflicts()
   end
-
   defp context_files(%Context{generate?: true} = context) do
     Gen.Context.files_to_be_generated(context)
   end
-
   defp context_files(%Context{generate?: false}) do
     []
   end
 
-  @doc false
-  def files_to_be_generated(context) do
-    to_gen = Mix.Tasks.Phx.Gen.Live.files_to_be_generated(context)
+  defp files_to_be_generated(%Context{schema: schema, context_app: context_app}) do
+    web_prefix = Mix.Phoenix.web_path(context_app)
+    test_prefix = Mix.Phoenix.web_test_path(context_app)
+    web_path = to_string(schema.web_path)
+    live_subdir = "#{schema.singular}_live"
 
-    new_extension = "slimleex"
-
-    Enum.map(to_gen, fn {type, name, path} ->
-      {type, name, String.replace_suffix(path, "leex", new_extension)}
-    end)
+    [
+      {:eex, "show.ex",                   Path.join([web_prefix, "live", web_path, live_subdir, "show.ex"])},
+      {:eex, "index.ex",                  Path.join([web_prefix, "live", web_path, live_subdir, "index.ex"])},
+      {:eex, "form_component.ex",         Path.join([web_prefix, "live", web_path, live_subdir, "form_component.ex"])},
+      {:eex, "form_component.html.leex",  Path.join([web_prefix, "live", web_path, live_subdir, "form_component.html.slimleex"])},
+      {:eex, "index.html.leex",           Path.join([web_prefix, "live", web_path, live_subdir, "index.html.slimleex"])},
+      {:eex, "show.html.leex",            Path.join([web_prefix, "live", web_path, live_subdir, "show.html.slimleex"])},
+      {:eex, "live_test.exs",             Path.join([test_prefix, "live", web_path, "#{schema.singular}_live_test.exs"])},
+      {:new_eex, "modal_component.ex",    Path.join([web_prefix, "live", "modal_component.ex"])},
+      {:new_eex, "live_helpers.ex",       Path.join([web_prefix, "live", "live_helpers.ex"])},
+    ]
   end
 
   defp copy_new_files(%Context{} = context, binding, paths) do
     files = files_to_be_generated(context)
-    Mix.Phoenix.copy_from(paths, "priv/templates/phx.gen.live", binding, files)
+    Mix.Phoenix.copy_from(paths, "priv/templates/phx.gen.live.slime", binding, files)
     if context.generate?, do: Gen.Context.copy_new_files(context, paths, binding)
 
     context
@@ -190,5 +195,55 @@ defmodule Mix.Tasks.Phx.Gen.Live.Slime do
       ~s|live "/#{schema.plural}/:id", #{inspect(schema.alias)}Live.Show, :show\n|,
       ~s|live "/#{schema.plural}/:id/show/edit", #{inspect(schema.alias)}Live.Show, :edit|
     ]
+  end
+
+  defp inputs(%Schema{attrs: attrs}) do
+    Enum.map(attrs, fn
+      {_, {:array, _}} ->
+        {nil, nil, nil}
+
+      {_, {:references, _}} ->
+        {nil, nil, nil}
+
+      {key, :integer} ->
+        {label(key), ~s(= number_input f, #{inspect(key)}, class: "form-control", autocomplete: "off"), error(key)}
+
+      {key, :float} ->
+        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control", autocomplete: "off"),
+         error(key)}
+
+      {key, :decimal} ->
+        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control", autocomplete: "off"),
+         error(key)}
+
+      {key, :boolean} ->
+        {label(key), ~s(= checkbox f, #{inspect(key)}, class: "form-control", autocomplete: "off"), error(key)}
+
+      {key, :text} ->
+        {label(key), ~s(= textarea f, #{inspect(key)}, class: "form-control", autocomplete: "off"), error(key)}
+
+      {key, :date} ->
+        {label(key), ~s(= date_select f, #{inspect(key)}, class: "form-control", autocomplete: "off"), error(key)}
+
+      {key, :time} ->
+        {label(key), ~s(= time_select f, #{inspect(key)}, class: "form-control", autocomplete: "off"), error(key)}
+
+      {key, :utc_datetime} ->
+        {label(key), ~s(= datetime_select f, #{inspect(key)}, class: "form-control", autocomplete: "off"), error(key)}
+
+      {key, :naive_datetime} ->
+        {label(key), ~s(= datetime_select f, #{inspect(key)}, class: "form-control", autocomplete: "off"), error(key)}
+
+      {key, _} ->
+        {label(key), ~s(= text_input f, #{inspect(key)}, class: "form-control", autocomplete: "off"), error(key)}
+    end)
+  end
+
+  defp label(key) do
+    ~s(= label f, #{inspect(key)}, class: "control-label")
+  end
+
+  defp error(field) do
+    ~s(= error_tag f, #{inspect(field)})
   end
 end
