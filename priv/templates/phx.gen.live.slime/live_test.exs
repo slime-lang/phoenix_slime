@@ -2,21 +2,27 @@ defmodule <%= inspect context.web_module %>.<%= inspect Module.concat(schema.web
   use <%= inspect context.web_module %>.ConnCase
 
   import Phoenix.LiveViewTest
-  import <%= inspect context.module %>Fixtures
 
-  @create_attrs <%= Mix.Phoenix.to_text for {key, value} <- schema.params.create, into: %{}, do: {key, Mix.Phoenix.Schema.live_form_value(value)} %>
-  @update_attrs <%= Mix.Phoenix.to_text for {key, value} <- schema.params.update, into: %{}, do: {key, Mix.Phoenix.Schema.live_form_value(value)} %>
-  @invalid_attrs <%= Mix.Phoenix.to_text for {key, value} <- schema.params.create, into: %{}, do: {key, value |> Mix.Phoenix.Schema.live_form_value() |> Mix.Phoenix.Schema.invalid_form_value()} %>
+  alias <%= inspect context.module %>
+
+  @create_attrs <%= inspect schema.params.create %>
+  @update_attrs <%= inspect schema.params.update %>
+  @invalid_attrs <%= inspect for {key, _} <- schema.params.create, into: %{}, do: {key, nil} %>
+
+  defp fixture(:<%= schema.singular %>) do
+    {:ok, <%= schema.singular %>} = <%= inspect context.alias %>.create_<%= schema.singular %>(@create_attrs)
+    <%= schema.singular %>
+  end
 
   defp create_<%= schema.singular %>(_) do
-    <%= schema.singular %> = <%= schema.singular %>_fixture()
+    <%= schema.singular %> = fixture(:<%= schema.singular %>)
     %{<%= schema.singular %>: <%= schema.singular %>}
   end
 
   describe "Index" do
     setup [:create_<%= schema.singular %>]
 
-    test "lists all <%= schema.plural %>", <%= if schema.string_attr do %>%{conn: conn, <%= schema.singular %>: <%= schema.singular %>}<% else %>%{conn: conn}<% end %> do
+    test "lists all <%= schema.plural %>", %{conn: conn, <%= schema.singular %>: <%= schema.singular %>} do
       {:ok, _index_live, html} = live(conn, Routes.<%= schema.route_helper %>_index_path(conn, :index))
 
       assert html =~ "Listing <%= schema.human_plural %>"<%= if schema.string_attr do %>
