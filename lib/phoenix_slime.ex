@@ -1,4 +1,8 @@
 defmodule PhoenixSlime do
+  @moduledoc """
+  Bring the power of Slime to your Phoenix applications
+  """
+
   @doc """
   Provides the `~l` sigil with HTML safe Slime syntax inside source files.
 

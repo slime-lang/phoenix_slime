@@ -104,6 +104,7 @@ defmodule Mix.Tasks.Phx.Gen.Html.Slime do
   import Mix.Tasks.Phx.Gen.Html, only: [print_shell_instructions: 1]
 
   @doc false
+  @impl true
   def run(args) do
     if Mix.Project.umbrella?() do
       Mix.raise("mix phx.gen.html.slime can only be run inside an application directory")
@@ -166,12 +167,10 @@ defmodule Mix.Tasks.Phx.Gen.Html.Slime do
         {label(key), ~s(= number_input f, #{inspect(key)}, class: "form-control"), error(key)}
 
       {key, :float} ->
-        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"),
-         error(key)}
+        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"), error(key)}
 
       {key, :decimal} ->
-        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"),
-         error(key)}
+        {label(key), ~s(= number_input f, #{inspect(key)}, step: "any", class: "form-control"), error(key)}
 
       {key, :boolean} ->
         {label(key), ~s(= checkbox f, #{inspect(key)}, class: "form-control"), error(key)}
