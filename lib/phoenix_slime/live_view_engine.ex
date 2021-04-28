@@ -1,4 +1,8 @@
 defmodule PhoenixSlime.LiveViewEngine do
+  @moduledoc """
+  The LiveView Engine for Slime
+  """
+
   @behaviour Phoenix.Template.Engine
 
   @doc """
