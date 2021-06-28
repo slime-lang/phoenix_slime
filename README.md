@@ -1,11 +1,11 @@
 # Phoenix Template Engine for Slim
 
-[![Build Status][travis-img]][travis] [![Hex Version][hex-img]][hex] [![License][license-img]][license]
+[![Build Status][github-img]][github] [![Hex Version][hex-img]][hex] [![License][license-img]][license]
 
 > Powered by [Slime](https://github.com/slime-lang/slime)
 
-[travis-img]: https://travis-ci.org/slime-lang/phoenix_slime.svg?branch=master
-[travis]: https://travis-ci.org/slime-lang/phoenix_slime
+[github-img]: https://github.com/slime-lang/slime/actions/workflows/ci.yml/badge.svg
+[github]: https://github.com/slime-lang/slime/actions/workflows/ci.yml
 [hex-img]: https://img.shields.io/hexpm/v/phoenix_slime.svg
 [hex]: https://hex.pm/packages/phoenix_slime
 [license-img]: http://img.shields.io/badge/license-MIT-brightgreen.svg

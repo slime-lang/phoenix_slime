@@ -1,4 +1,8 @@
 defmodule PhoenixSlime.Engine do
+  @moduledoc """
+  The Phoenix Engine implementation for Slime
+  """
+
   @behaviour Phoenix.Template.Engine
 
   @doc """
