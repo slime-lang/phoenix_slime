@@ -18,5 +18,7 @@ defmodule PhoenixSlime.Engine do
     file_path
     |> File.read!()
     |> Slime.Renderer.precompile()
+  rescue
+    e in Slime.TemplateSyntaxError -> reraise %{e | source: file_path}, __STACKTRACE__
   end
 end
